@@ -86,6 +86,46 @@ class PTSlider {
                document.removeEventListener('mousemove', dragSlider);
           });
 
+          // Touch evnets...
+          slider.addEventListener('touchstart', function (e) {
+               startX = e.touches[0].clientX;
+               offsetX = parseInt(getComputedStyle(this).getPropertyValue('left'));
+               document.addEventListener('touchmove', swiping);
+           });
+           
+           // Add touchend event listener
+           document.addEventListener('touchend', function () {
+               // Remove the touchmove event listener
+               lastX = newX;
+               newPlacement = parseInt(getComputedStyle(slider).getPropertyValue('--x-exis'));
+               if (newPlacement > 0) {
+                   slider.style.setProperty('--x-exis', '0px');
+                   newPlacement = lastX = 0;
+               } else if (newPlacement < slidingLength) {
+                   slider.style.setProperty('--x-exis', slidingLength + 'px');
+                   newPlacement = lastX = slidingLength;
+               }
+           
+               document.removeEventListener('touchmove', swiping);
+           });
+
+           // Function to handle Swiping events
+          function swiping(e) {
+               newX = offsetX + e.touches[0].clientX - startX;
+               lastAbs = Math.abs(lastX); newAbs = Math.abs(newX);
+               const checkValue = lastAbs > newAbs ? lastAbs - newAbs : newAbs - lastAbs;
+               if (checkValue > minDistance) {
+               navLength = Math.round(newPlacement + newX);
+               slider.style.setProperty('--x-exis', navLength + 'px');
+               navLengthAbs = Math.abs(navLength);
+               if (navLength <= 0 && navLengthAbs <= SlidingAbs) {
+                    const navWidth = Math.round(navLengthAbs * navMovingArea / SlidingAbs + minNavWidth);
+                    navigationBullet.style.setProperty('width', navWidth + 'px');
+               }
+               // console.log('newX :>> ', minNavWidth);
+               }
+          }
+
           // Function to handle dragging
           function dragSlider(e) {
                // if(navMovingArea<0){navigationBullet.hide();return false}
