@@ -1,10 +1,18 @@
+/*
+* Prefixed by https://autoprefixer.github.io
+* PostCSS: v8.4.14,
+* Autoprefixer: v10.4.7
+* Browsers: last 4 version
+*/
+
 body,html{
     margin: 0;
     font-size: 1rem;
     font-family:system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 }
 *{ 
-    box-sizing: border-box;
+    -webkit-box-sizing: border-box; 
+            box-sizing: border-box;
 }
 ul, ol{
     margin: 0;
@@ -14,30 +22,38 @@ ul, ol{
 h1{
     text-align: center;
 }
+ul,li,button,a,div{-webkit-tap-highlight-color:rgba(0,0,0,0)}
 .pt_slider_wraper{
     margin: auto;
     padding: 5px;
     height: 350px;
-    width: 90%;
-    max-width: 600px;
+    width:90%;
+    max-width: 800px;
     padding-top: 20px;
     border-radius: 18px;
     outline: 15px solid #123;
-    box-shadow: inset 0px 0px 15px #1235;
+    -webkit-box-shadow: inset 0px 0px 15px #1235;
+            box-shadow: inset 0px 0px 15px #1235;
     overflow: hidden;
     margin-bottom: 50px;
 }
-.pt_slider{
-    --x-exis:0px;
-    transform:translate3d(var(--x-exis),0px,0px);
-    cursor:pointer;
-    transition: transform 450ms ease-out;
-}
 .pt_slider_wraper .pt_slider{
+    --x-exis:0px;
+    -webkit-transform:translate3d(var(--x-exis),0px,0px);
+            transform:translate3d(var(--x-exis),0px,0px);
+    cursor:pointer;
+    -webkit-transition:-webkit-transform 0.5s cubic-bezier(0.2, 0.9, 0.3, 1.3);
+    transition:-webkit-transform 0.5s cubic-bezier(0.2, 0.9, 0.3, 1.3);
+    -o-transition:transform 0.5s cubic-bezier(0.2, 0.9, 0.3, 1.3);
+    transition:transform 0.5s cubic-bezier(0.2, 0.9, 0.3, 1.3);
+    transition:transform 0.5s cubic-bezier(0.2, 0.9, 0.3, 1.3), -webkit-transform 0.5s cubic-bezier(0.2, 0.9, 0.3, 1.3);
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
-    flex-wrap: nowrap;
+    -ms-flex-wrap: nowrap;
+        flex-wrap: nowrap;
     white-space: nowrap;
-    position: relative;
+    position: relative
 }
 .pt_slider_wraper .pt_slider .slider_item{
     text-transform: uppercase;
@@ -48,13 +64,16 @@ h1{
     font-weight: 700;
     margin: 5px;
     -webkit-user-select: none;
-    user-select: none;
+    -moz-user-select: none;
+     -ms-user-select: none;
+         user-select: none;
 }
 .pt_slider_navigator{
-    --bullet:10px;
-    width: 100px;
+    --bullet:5px;
+    width: 150px;
     height: var(--bullet);
-    box-shadow: inset 0px 0px 8px #0b62b955;
+    -webkit-box-shadow: inset 0px 0px 8px #0b62b955;
+            box-shadow: inset 0px 0px 8px #0b62b955;
     border-radius: 50px;
     margin-top: 20px;
     margin-left: auto;
@@ -64,9 +83,10 @@ h1{
     height: var(--bullet);
     width: var(--bullet);
     border-radius: 50px;
-    /* background-image: radial-gradient(#44a2ff,#093968); */
     background-color: #EAAF0F;
     cursor: pointer;
+    -webkit-transition: width .3s ease;
+    -o-transition: width .3s ease;
     transition: width .3s ease;
     max-width: 100%;
 }
